@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>CEZOO Login</title>
 
@@ -30,6 +30,9 @@ body{
 body{
     position:fixed;
     inset:0;
+}
+
+body{
     font-family:'Poppins',sans-serif;
     background:#07913d;
 }
@@ -241,10 +244,30 @@ input{
 
 /* =========================
    LOGIN OPEN
-   IMAGE STAYS SAME
+
+   IMAGE HIDE
 ========================= */
 
-/* Image ni hide/move cheyyamu. White sheet overlay matrame. */
+.login-page.login-open .login-character{
+    opacity:0;
+    transform:translateY(-15px);
+    pointer-events:none;
+
+    position:absolute;
+    visibility:hidden;
+}
+
+
+/* Hero still shows:
+   CEZOO +
+   Groceries delivered in minutes
+*/
+
+.login-page.login-open .login-hero{
+    flex:0 0 auto;
+    min-height:310px;
+}
+
 
 /* =========================
    BOTTOM WHITE AREA
@@ -252,10 +275,7 @@ input{
 
 .login-bottom{
 
-    position:fixed;
-    left:0;
-    right:0;
-    bottom:0;
+    position:relative;
     z-index:10;
 
     background:#ffffff;
@@ -283,15 +303,14 @@ input{
 ========================= */
 
 .login-page.login-open .login-bottom{
-    min-height:285px;
-    padding-top:22px;
-    text-align:left;
-}
 
-.login-page.login-open.keyboard-open .login-bottom{
-    /* keyboard resize ayina visible viewport bottom ki sheet stick avutundi */
-    min-height:285px;
-    padding-top:20px;
+    flex:1;
+
+    min-height:calc(100dvh - 310px);
+
+    padding-top:32px;
+
+    text-align:left;
 }
 
 
@@ -662,12 +681,12 @@ input{
         padding-right:22px;
     }
 
-    .login-page.login-open .login-bottom{
-        min-height:270px;
+    .login-page.login-open .login-hero{
+        min-height:280px;
     }
 
-    .login-page.login-open.keyboard-open .login-bottom{
-        min-height:285px;
+    .login-page.login-open .login-bottom{
+        min-height:calc(100dvh - 280px);
     }
 
     .form-title{
@@ -676,11 +695,6 @@ input{
 
 }
 
-
-/* FINAL IMAGE FIT FIX: first screen image full visible, no crop */
-.login-character{ min-height:0; }
-.login-character img{ width:auto; height:auto; max-width:min(78vw,390px); max-height:calc(100dvh - 385px); object-fit:contain; }
-@media(max-width:480px){ .login-character img{ max-width:77vw; max-height:calc(100dvh - 370px); } }
 </style>
 </head>
 
@@ -810,13 +824,33 @@ input{
                 class="login-step active"
                 id="nameStep"
             >
-                <div class="form-title">What's your name?</div>
-                <div class="form-subtitle">Enter your name to continue</div>
-                <div class="input-box">
-                    <input type="text" id="nameInput" placeholder="Enter your name" autocomplete="name">
+
+                <div class="form-title">
+                    What's your name?
                 </div>
-                <button class="next-btn" onclick="openMobile()">Next</button>
+
+                <div class="form-subtitle">
+                    Enter your name to continue
+                </div>
+
+                <div class="input-box">
+                    <input
+                        type="text"
+                        id="nameInput"
+                        placeholder="Enter your name"
+                        autocomplete="name"
+                    >
+                </div>
+
+                <button
+                    class="next-btn"
+                    onclick="openMobile()"
+                >
+                    Next
+                </button>
+
             </div>
+
 
             <!-- MOBILE STEP -->
 
@@ -940,104 +974,319 @@ input{
 
 
 <script>
-const loginPage = document.getElementById("loginPage");
-const nameStep = document.getElementById("nameStep");
-const mobileStep = document.getElementById("mobileStep");
-const otpStep = document.getElementById("otpStep");
-const nameInput = document.getElementById("nameInput");
-const mobileInput = document.getElementById("mobileInput");
-const otpNumber = document.getElementById("otpNumber");
-const otpInputs = Array.from(document.querySelectorAll(".otp-boxes input"));
+
+const loginPage =
+    document.getElementById("loginPage");
+
+const nameStep =
+    document.getElementById("nameStep");
+
+const nameInput =
+    document.getElementById("nameInput");
+
+const mobileStep =
+    document.getElementById("mobileStep");
+
+const otpStep =
+    document.getElementById("otpStep");
+
+const mobileInput =
+    document.getElementById("mobileInput");
+
+const otpNumber =
+    document.getElementById("otpNumber");
+
 let currentStep = "home";
 
-function safeFocus(el){
-    if(!el) return;
-    try{ el.focus({preventScroll:true}); }catch(e){ el.focus(); }
-}
 
-function showStep(step){
-    nameStep.classList.remove("active");
-    mobileStep.classList.remove("active");
-    otpStep.classList.remove("active");
-    currentStep = step;
-    if(step === "name") nameStep.classList.add("active");
-    if(step === "mobile") mobileStep.classList.add("active");
-    if(step === "otp") otpStep.classList.add("active");
-}
+/* =========================
+   OPEN MOBILE LOGIN
+========================= */
 
 function openMobileLogin(){
-    loginPage.classList.add("login-open");
-    showStep("name");
-    safeFocus(nameInput);
+
+    currentStep = "name";
+
+    loginPage.classList.add(
+        "login-open"
+    );
+
+    nameStep.classList.add("active");
+    mobileStep.classList.remove("active");
+    otpStep.classList.remove("active");
+
+    try{
+        nameInput.focus({preventScroll:true});
+    }catch(e){
+        nameInput.focus();
+    }
 }
+
+
+/* =========================
+   NAME → MOBILE
+========================= */
 
 function openMobile(){
-    if(nameInput.value.trim().length < 2){
+
+    const name = nameInput.value.trim();
+
+    if(name.length < 2){
         alert("Please enter your name");
-        safeFocus(nameInput);
+        try{ nameInput.focus({preventScroll:true}); }
+        catch(e){ nameInput.focus(); }
         return;
     }
-    showStep("mobile");
-    safeFocus(mobileInput);
+
+    currentStep = "mobile";
+    nameStep.classList.remove("active");
+    mobileStep.classList.add("active");
+    otpStep.classList.remove("active");
+
+    try{ mobileInput.focus({preventScroll:true}); }
+    catch(e){ mobileInput.focus(); }
 }
 
-mobileInput.addEventListener("input", function(){
-    this.value = this.value.replace(/\D/g,"").slice(0,10);
-});
+
+/* =========================
+   ONLY NUMBERS
+========================= */
+
+mobileInput.addEventListener(
+    "input",
+    function(){
+
+        this.value =
+            this.value
+                .replace(/\D/g,"")
+                .slice(0,10);
+
+    }
+);
+
+
+/* =========================
+   MOBILE → OTP
+========================= */
 
 function openOtp(){
-    const mobile = mobileInput.value.replace(/\D/g,"");
+
+    const mobile =
+        mobileInput.value
+            .replace(/\D/g,"");
+
+
     if(mobile.length !== 10){
-        alert("Please enter a valid 10 digit mobile number");
-        safeFocus(mobileInput);
+
+        alert(
+            "Please enter a valid 10 digit mobile number"
+        );
+
+        mobileInput.focus();
+
         return;
     }
-    otpNumber.textContent = "+91 " + mobile;
-    showStep("otp");
-    safeFocus(otpInputs[0]);
+
+
+    otpNumber.textContent =
+        "+91 " + mobile;
+
+
+    currentStep = "otp";
+
+
+    mobileStep.classList.remove(
+        "active"
+    );
+
+    otpStep.classList.add(
+        "active"
+    );
+
+
+    setTimeout(() => {
+
+        otpInputs[0].focus();
+
+    },100);
+
 }
 
-otpInputs.forEach((input,index)=>{
-    input.addEventListener("input", function(){
-        this.value = this.value.replace(/\D/g,"").slice(0,1);
-        if(this.value && index < otpInputs.length-1) safeFocus(otpInputs[index+1]);
-    });
-    input.addEventListener("keydown", function(e){
-        if(e.key === "Backspace" && !this.value && index > 0) safeFocus(otpInputs[index-1]);
-    });
-});
+
+/* =========================
+   OTP INPUTS
+========================= */
+
+const otpInputs =
+    Array.from(
+        document.querySelectorAll(
+            ".otp-boxes input"
+        )
+    );
+
+
+otpInputs.forEach(
+    (input,index) => {
+
+
+        input.addEventListener(
+            "input",
+            function(){
+
+                this.value =
+                    this.value
+                        .replace(/\D/g,"")
+                        .slice(0,1);
+
+
+                if(
+                    this.value &&
+                    index < otpInputs.length - 1
+                ){
+
+                    otpInputs[
+                        index + 1
+                    ].focus();
+
+                }
+
+            }
+        );
+
+
+        input.addEventListener(
+            "keydown",
+            function(event){
+
+                if(
+                    event.key === "Backspace" &&
+                    !this.value &&
+                    index > 0
+                ){
+
+                    otpInputs[
+                        index - 1
+                    ].focus();
+
+                }
+
+            }
+        );
+
+    }
+);
+
+
+/* =========================
+   VERIFY DEMO
+========================= */
 
 function verifyOtp(){
-    const otp = otpInputs.map(i=>i.value).join("");
-    if(otp.length !== 6){ alert("Please enter complete OTP"); return; }
-    alert("OTP completed");
-}
 
-function updateKeyboardState(){
-    if(!window.visualViewport) return;
-    const diff = window.innerHeight - window.visualViewport.height;
-    loginPage.classList.toggle("keyboard-open", diff > 120);
-}
-if(window.visualViewport){
-    visualViewport.addEventListener("resize", updateKeyboardState);
-    visualViewport.addEventListener("scroll", updateKeyboardState);
-}
+    const otp =
+        otpInputs
+            .map(input => input.value)
+            .join("");
 
-function loginBack(){
-    if(currentStep === "otp"){ showStep("mobile"); safeFocus(mobileInput); return; }
-    if(currentStep === "mobile"){ showStep("name"); safeFocus(nameInput); return; }
-    if(currentStep === "name"){
-        currentStep = "home";
-        document.activeElement?.blur();
-        loginPage.classList.remove("keyboard-open");
-        loginPage.classList.remove("login-open");
+
+    if(otp.length !== 6){
+
+        alert(
+            "Please enter complete OTP"
+        );
+
         return;
     }
-    if(window.history.length > 1) history.back();
+
+
+    /*
+       UI DEMO ONLY.
+       Existing OTP verification
+       later ikkada connect cheddam.
+    */
+
+    alert("OTP completed");
+
 }
 
-window.addEventListener("scroll", ()=>window.scrollTo(0,0), {passive:true});
-updateKeyboardState();
+
+/* =========================
+   BACK
+========================= */
+
+function loginBack(){
+
+
+    /* OTP → MOBILE */
+
+    if(currentStep === "otp"){
+
+        currentStep = "mobile";
+
+        otpStep.classList.remove(
+            "active"
+        );
+
+        mobileStep.classList.add(
+            "active"
+        );
+
+
+        setTimeout(() => {
+
+            mobileInput.focus();
+
+        },100);
+
+        return;
+    }
+
+
+    /* MOBILE → NAME */
+
+    if(currentStep === "mobile"){
+
+        currentStep = "name";
+        mobileStep.classList.remove("active");
+        otpStep.classList.remove("active");
+        nameStep.classList.add("active");
+
+        try{ nameInput.focus({preventScroll:true}); }
+        catch(e){ nameInput.focus(); }
+
+        return;
+    }
+
+
+    /* NAME → FIRST SCREEN */
+
+    if(currentStep === "name"){
+
+        currentStep = "home";
+        document.activeElement?.blur();
+
+        loginPage.classList.remove(
+            "login-open"
+        );
+
+        nameStep.classList.add("active");
+        mobileStep.classList.remove("active");
+        otpStep.classList.remove("active");
+
+        return;
+    }
+
+
+    /* FIRST SCREEN → PAGE BACK */
+
+    if(window.history.length > 1){
+
+        history.back();
+
+    }
+
+}
+
 </script>
 
 </body>
