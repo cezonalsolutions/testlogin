@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
 <title>CEZOO Login</title>
 
@@ -24,10 +25,15 @@ body{
     width:100%;
     height:100%;
     overflow:hidden;
+    overscroll-behavior:none;
 }
 
 body{
+    position:fixed;
+    inset:0;
+
     font-family:'Poppins',sans-serif;
+
     background:#07913d;
 }
 
@@ -42,7 +48,8 @@ input{
 ========================= */
 
 .login-page{
-    position:relative;
+    position:fixed;
+    inset:0;
 
     width:100%;
     height:100dvh;
@@ -79,6 +86,7 @@ input{
 ========================= */
 
 .login-hero::before{
+
     content:"";
 
     position:absolute;
@@ -109,10 +117,11 @@ input{
 
 
 /* =========================
-   BACK BUTTON
+   BACK
 ========================= */
 
 .back-btn{
+
     position:absolute;
 
     top:calc(35px + env(safe-area-inset-top));
@@ -143,6 +152,7 @@ input{
 ========================= */
 
 .cezoo-logo{
+
     position:relative;
     z-index:2;
 
@@ -167,6 +177,7 @@ input{
 ========================= */
 
 .hero-text{
+
     position:relative;
     z-index:2;
 
@@ -188,10 +199,15 @@ input{
 
 
 /* =========================
-   CHARACTER
+   IMAGE
+
+   IMPORTANT:
+   LOGIN OPEN AYYINA
+   IMAGE POSITION CHANGE AVVADU
 ========================= */
 
 .login-character{
+
     position:relative;
     z-index:2;
 
@@ -204,14 +220,12 @@ input{
     display:flex;
     align-items:flex-end;
     justify-content:center;
-
-    transition:
-        opacity .22s ease,
-        visibility .22s ease;
 }
 
 .login-character img{
+
     width:100%;
+
     max-height:430px;
 
     display:block;
@@ -221,24 +235,22 @@ input{
 }
 
 
-/* LOGIN OPEN =
-   IMAGE ONLY HIDE
+/*
+   IMAGE KI LOGIN-OPEN
+   CSS EMI LEDU.
 
-   HERO POSITION / HEIGHT
-   CHANGE AVVADU
+   SO IMAGE MOVE/HIDE AVVADU.
+   WHITE SHEET IMAGE NI
+   COVER CHESTUNDI.
 */
-
-.login-page.login-open .login-character{
-    opacity:0;
-    visibility:hidden;
-}
 
 
 /* =========================
-   FIRST WHITE AREA
+   WHITE BOTTOM SHEET
 ========================= */
 
 .login-bottom{
+
     position:absolute;
 
     left:0;
@@ -247,6 +259,8 @@ input{
 
     z-index:20;
 
+    height:190px;
+
     background:#fff;
 
     border-radius:30px 30px 0 0;
@@ -254,57 +268,48 @@ input{
     padding:
         28px
         24px
-        calc(28px + env(safe-area-inset-bottom));
+        calc(25px + env(safe-area-inset-bottom));
+
+    box-shadow:
+        0 -4px 18px rgba(0,0,0,.06);
 
     text-align:center;
 
-    box-shadow:
-        0 -3px 15px rgba(0,0,0,.045);
+    overflow:hidden;
 
     transition:
-        height .35s cubic-bezier(.22,.8,.25,1),
-        border-radius .35s ease;
-
-    /*
-       FIRST SCREEN WHITE AREA
-    */
-    height:190px;
+        height .34s cubic-bezier(.22,.75,.25,1);
 }
 
 
 /* =========================
-   LOGIN OPEN
+   SHEET OPEN
 
-   SAME WHITE AREA OVERLAY
-   BOTTOM NUNCHI PAIKI
+   ONLY SHEET HEIGHT CHANGES
+   PAGE / IMAGE / HERO
+   CHANGE AVVAVU
 ========================= */
 
 .login-page.login-open .login-bottom{
 
-    /*
-       PAGE / HERO MOVE AVVADU.
+    height:430px;
 
-       WHITE SHEET MATRAM
-       BOTTOM NUNCHI PAIKI EXPAND.
-    */
-
-    height:55dvh;
+    padding-top:24px;
 
     text-align:left;
-
-    padding-top:25px;
 }
 
 
 /* =========================
-   FIRST CONTENT
+   FIRST SCREEN CONTENT
 ========================= */
 
 .first-login-content{
     display:block;
 }
 
-.login-page.login-open .first-login-content{
+.login-page.login-open
+.first-login-content{
     display:none;
 }
 
@@ -314,6 +319,7 @@ input{
 ========================= */
 
 .phone-login-btn{
+
     width:100%;
     height:60px;
 
@@ -337,10 +343,11 @@ input{
 
 
 /* =========================
-   DASHED LINE
+   TERMS LINE
 ========================= */
 
 .terms-line{
+
     width:100%;
 
     margin:25px 0 18px;
@@ -356,6 +363,7 @@ input{
 ========================= */
 
 .terms{
+
     color:#999;
 
     font-size:11.5px;
@@ -365,6 +373,7 @@ input{
 }
 
 .terms a{
+
     color:#777;
 
     font-weight:600;
@@ -374,25 +383,27 @@ input{
 
 
 /* =========================
-   LOGIN FORM
+   FORM
 ========================= */
 
 .login-form{
     display:none;
 
     width:100%;
-    max-width:500px;
+
+    max-width:480px;
 
     margin:0 auto;
 }
 
-.login-page.login-open .login-form{
+.login-page.login-open
+.login-form{
     display:block;
 }
 
 
 /* =========================
-   LOGIN STEP
+   STEPS
 ========================= */
 
 .login-step{
@@ -400,9 +411,11 @@ input{
 }
 
 .login-step.active{
+
     display:block;
 
-    animation:stepIn .22s ease;
+    animation:
+        stepIn .22s ease;
 }
 
 @keyframes stepIn{
@@ -424,7 +437,8 @@ input{
 ========================= */
 
 .form-title{
-    color:#171717;
+
+    color:#161616;
 
     font-size:22px;
     line-height:1.3;
@@ -433,6 +447,7 @@ input{
 }
 
 .form-subtitle{
+
     margin-top:6px;
 
     color:#8b8b8b;
@@ -447,6 +462,7 @@ input{
 ========================= */
 
 .input-box{
+
     width:100%;
     height:58px;
 
@@ -455,18 +471,17 @@ input{
     display:flex;
     align-items:center;
 
+    background:#fff;
+
     border:1.5px solid #dedede;
 
     border-radius:15px;
 
-    background:#fff;
-
     overflow:hidden;
-
-    transition:.2s;
 }
 
 .input-box:focus-within{
+
     border-color:#078d39;
 
     box-shadow:
@@ -474,14 +489,16 @@ input{
         rgba(7,141,57,.07);
 }
 
+
 .input-box input{
+
     width:100%;
     height:100%;
 
-    padding:0 16px;
-
     border:0;
     outline:0;
+
+    padding:0 16px;
 
     background:transparent;
 
@@ -501,6 +518,7 @@ input{
 ========================= */
 
 .mobile-prefix{
+
     height:26px;
 
     padding:
@@ -526,10 +544,11 @@ input{
 
 
 /* =========================
-   NEXT BUTTON
+   NEXT
 ========================= */
 
 .next-btn{
+
     width:100%;
     height:56px;
 
@@ -559,6 +578,7 @@ input{
 ========================= */
 
 .otp-boxes{
+
     width:100%;
 
     display:flex;
@@ -569,6 +589,7 @@ input{
 }
 
 .otp-boxes input{
+
     width:100%;
     min-width:0;
 
@@ -590,6 +611,7 @@ input{
 }
 
 .otp-boxes input:focus{
+
     border-color:#078d39;
 
     box-shadow:
@@ -598,7 +620,9 @@ input{
 }
 
 .otp-number{
+
     color:#078d39;
+
     font-weight:600;
 }
 
@@ -608,6 +632,7 @@ input{
 ========================= */
 
 .resend-btn{
+
     display:block;
 
     margin:16px auto 0;
@@ -631,17 +656,23 @@ input{
 @media(max-width:480px){
 
     .cezoo-logo{
+
         font-size:44px;
+
         margin-top:50px;
     }
 
     .hero-text{
+
         font-size:19px;
+
         margin-top:24px;
     }
 
     .login-character{
+
         width:77vw;
+
         margin-top:4px;
     }
 
@@ -649,7 +680,9 @@ input{
         max-height:390px;
     }
 
+
     .login-bottom{
+
         height:190px;
 
         border-radius:
@@ -659,14 +692,22 @@ input{
         padding-right:22px;
     }
 
+
     /*
-       OPEN SHEET HEIGHT
+       SHEET OPEN HEIGHT
+
+       IMAGE/HERO POSITION
+       TOUCH CHEYYATLEDU
     */
 
-    .login-page.login-open .login-bottom{
-        height:52dvh;
+    .login-page.login-open
+    .login-bottom{
+
+        height:410px;
+
         padding-top:22px;
     }
+
 
     .form-title{
         font-size:21px;
@@ -674,21 +715,18 @@ input{
 }
 
 
-/* SMALL HEIGHT PHONES */
+/* =========================
+   SHORT SCREEN
+========================= */
 
-@media(max-height:700px){
+@media(max-height:650px){
 
-    .login-page.login-open .login-bottom{
-        height:58dvh;
+    .login-page.login-open
+    .login-bottom{
+
+        height:390px;
     }
 
-    .cezoo-logo{
-        margin-top:40px;
-    }
-
-    .hero-text{
-        margin-top:18px;
-    }
 }
 
 </style>
@@ -703,285 +741,284 @@ input{
 >
 
 
-    <!-- ======================
-         GREEN HERO
-    ======================= -->
+<!-- =========================
+     GREEN HERO
+========================= -->
 
-    <section class="login-hero">
+<section class="login-hero">
 
 
-        <!-- BACK -->
+    <!-- BACK -->
 
-        <button
-            class="back-btn"
-            onclick="loginBack()"
-            aria-label="Back"
+    <button
+        class="back-btn"
+        onclick="loginBack()"
+        aria-label="Back"
+    >
+
+        <i class="fa-solid fa-arrow-left"></i>
+
+    </button>
+
+
+    <!-- CEZOO -->
+
+    <div class="cezoo-logo">
+        CEZOO
+    </div>
+
+
+    <!-- TEXT -->
+
+    <div class="hero-text">
+
+        Groceries delivered<br>
+
+        <span>
+            in minutes
+        </span>
+
+    </div>
+
+
+    <!-- IMAGE -->
+
+    <div class="login-character">
+
+        <img
+            src="god.webp"
+            alt="CEZOO"
         >
 
-            <i class="fa-solid fa-arrow-left"></i>
+    </div>
+
+
+</section>
+
+
+
+<!-- =========================
+     WHITE BOTTOM SHEET
+========================= -->
+
+<section
+    class="login-bottom"
+    id="loginBottom"
+>
+
+
+    <!-- =====================
+         FIRST SCREEN
+    ====================== -->
+
+    <div class="first-login-content">
+
+
+        <button
+            class="phone-login-btn"
+            onclick="startLogin()"
+        >
+
+            Log in with phone number
 
         </button>
 
 
-        <!-- CEZOO -->
-
-        <div class="cezoo-logo">
-            CEZOO
-        </div>
+        <div class="terms-line"></div>
 
 
-        <!-- TEXT -->
+        <div class="terms">
 
-        <div class="hero-text">
+            By tapping, I accept the
 
-            Groceries delivered<br>
+            <a href="#">
+                terms of service
+            </a>
 
-            <span>
-                in minutes
-            </span>
+            &amp;
 
-        </div>
-
-
-        <!-- IMAGE -->
-
-        <div class="login-character">
-
-            <img
-                src="god.webp"
-                alt="CEZOO"
-            >
+            <a href="#">
+                privacy policy
+            </a>
 
         </div>
 
 
-    </section>
+    </div>
 
 
 
-    <!-- ======================
-         WHITE BOTTOM SHEET
-    ======================= -->
+    <!-- =====================
+         LOGIN FORM
+    ====================== -->
 
-    <section
-        class="login-bottom"
-        id="loginBottom"
-    >
+    <div class="login-form">
 
 
-        <!-- =====================
-             ORIGINAL SCREEN
-        ====================== -->
+        <!-- =================
+             STEP 1 NAME
+        ================== -->
 
-        <div class="first-login-content">
+        <div
+            class="login-step active"
+            id="nameStep"
+        >
+
+
+            <div class="form-title">
+                What's your name?
+            </div>
+
+
+            <div class="form-subtitle">
+                Enter your name to continue
+            </div>
+
+
+            <div class="input-box">
+
+                <input
+                    type="text"
+                    id="nameInput"
+                    placeholder="Enter your name"
+                    autocomplete="name"
+                >
+
+            </div>
 
 
             <button
-                class="phone-login-btn"
-                onclick="startLogin()"
+                class="next-btn"
+                onclick="openMobile()"
             >
-
-                Log in with phone number
-
+                Next
             </button>
 
 
-            <div class="terms-line"></div>
+        </div>
 
 
-            <div class="terms">
 
-                By tapping, I accept the
+        <!-- =================
+             STEP 2 MOBILE
+        ================== -->
 
-                <a href="#">
-                    terms of service
-                </a>
+        <div
+            class="login-step"
+            id="mobileStep"
+        >
 
-                &amp;
 
-                <a href="#">
-                    privacy policy
-                </a>
+            <div class="form-title">
+                Enter your mobile number
+            </div>
+
+
+            <div class="form-subtitle">
+                We'll send an OTP to verify your number
+            </div>
+
+
+            <div class="input-box mobile-box">
+
+
+                <div class="mobile-prefix">
+                    +91
+                </div>
+
+
+                <input
+                    type="tel"
+                    id="mobileInput"
+                    placeholder="Enter mobile number"
+                    maxlength="10"
+                    inputmode="numeric"
+                    autocomplete="tel"
+                >
+
 
             </div>
+
+
+            <button
+                class="next-btn"
+                onclick="openOtp()"
+            >
+                Next
+            </button>
 
 
         </div>
 
 
 
-        <!-- =====================
-             LOGIN FORM
-        ====================== -->
+        <!-- =================
+             STEP 3 OTP
+        ================== -->
 
-        <div class="login-form">
-
-
-            <!-- =================
-                 1. NAME
-            ================== -->
-
-            <div
-                class="login-step active"
-                id="nameStep"
-            >
+        <div
+            class="login-step"
+            id="otpStep"
+        >
 
 
-                <div class="form-title">
-                    What's your name?
-                </div>
+            <div class="form-title">
+                Enter OTP
+            </div>
 
 
-                <div class="form-subtitle">
-                    Enter your name to continue
-                </div>
+            <div class="form-subtitle">
 
+                OTP sent to
 
-                <div class="input-box">
-
-                    <input
-                        type="text"
-                        id="nameInput"
-                        placeholder="Enter your name"
-                        autocomplete="name"
-                    >
-
-                </div>
-
-
-                <button
-                    class="next-btn"
-                    onclick="openMobile()"
-                >
-                    Next
-                </button>
-
+                <span
+                    class="otp-number"
+                    id="otpNumber"
+                ></span>
 
             </div>
 
 
+            <div class="otp-boxes">
 
-            <!-- =================
-                 2. MOBILE
-            ================== -->
+                <input type="tel" maxlength="1" inputmode="numeric">
 
-            <div
-                class="login-step"
-                id="mobileStep"
-            >
+                <input type="tel" maxlength="1" inputmode="numeric">
 
+                <input type="tel" maxlength="1" inputmode="numeric">
 
-                <div class="form-title">
-                    Enter your mobile number
-                </div>
+                <input type="tel" maxlength="1" inputmode="numeric">
 
+                <input type="tel" maxlength="1" inputmode="numeric">
 
-                <div class="form-subtitle">
-                    We'll send an OTP to verify your number
-                </div>
-
-
-                <div class="input-box mobile-box">
-
-
-                    <div class="mobile-prefix">
-                        +91
-                    </div>
-
-
-                    <input
-                        type="tel"
-                        id="mobileInput"
-                        placeholder="Enter mobile number"
-                        maxlength="10"
-                        inputmode="numeric"
-                        autocomplete="tel"
-                    >
-
-
-                </div>
-
-
-                <button
-                    class="next-btn"
-                    onclick="openOtp()"
-                >
-                    Next
-                </button>
-
+                <input type="tel" maxlength="1" inputmode="numeric">
 
             </div>
 
 
-
-            <!-- =================
-                 3. OTP
-            ================== -->
-
-            <div
-                class="login-step"
-                id="otpStep"
+            <button
+                class="next-btn"
+                onclick="verifyOtp()"
             >
+                Verify & Continue
+            </button>
 
 
-                <div class="form-title">
-                    Enter OTP
-                </div>
-
-
-                <div class="form-subtitle">
-
-                    OTP sent to
-
-                    <span
-                        class="otp-number"
-                        id="otpNumber"
-                    ></span>
-
-                </div>
-
-
-                <div class="otp-boxes">
-
-                    <input type="tel" maxlength="1" inputmode="numeric">
-
-                    <input type="tel" maxlength="1" inputmode="numeric">
-
-                    <input type="tel" maxlength="1" inputmode="numeric">
-
-                    <input type="tel" maxlength="1" inputmode="numeric">
-
-                    <input type="tel" maxlength="1" inputmode="numeric">
-
-                    <input type="tel" maxlength="1" inputmode="numeric">
-
-                </div>
-
-
-                <button
-                    class="next-btn"
-                    onclick="verifyOtp()"
-                >
-                    Verify & Continue
-                </button>
-
-
-                <button
-                    class="resend-btn"
-                    type="button"
-                >
-                    Resend OTP
-                </button>
-
-
-            </div>
+            <button
+                class="resend-btn"
+                type="button"
+            >
+                Resend OTP
+            </button>
 
 
         </div>
 
 
-    </section>
+    </div>
 
+
+</section>
 
 </div>
 
@@ -1028,7 +1065,6 @@ function showStep(step){
         currentStep = "name";
 
         nameStep.classList.add("active");
-
     }
 
 
@@ -1037,7 +1073,6 @@ function showStep(step){
         currentStep = "mobile";
 
         mobileStep.classList.add("active");
-
     }
 
 
@@ -1046,23 +1081,23 @@ function showStep(step){
         currentStep = "otp";
 
         otpStep.classList.add("active");
-
     }
 
 }
 
 
 /* =========================
-   OPEN LOGIN
-
-   IMPORTANT:
-   PAGE HEIGHT CHANGE LEDU.
-   WHITE SHEET ONLY EXPANDS.
+   LOGIN CLICK
 ========================= */
 
 function startLogin(){
 
     showStep("name");
+
+
+    /*
+       ONLY WHITE SHEET OPEN
+    */
 
     loginPage.classList.add(
         "login-open"
@@ -1070,12 +1105,21 @@ function startLogin(){
 
 
     /*
-       Immediate focus:
-       mobile browser / WebView
-       keyboard open avvadaniki.
+       PAGE SCROLL CHEYYAKUNDA
+       INPUT FOCUS
     */
 
-    nameInput.focus();
+    try{
+
+        nameInput.focus({
+            preventScroll:true
+        });
+
+    }catch(e){
+
+        nameInput.focus();
+
+    }
 
 }
 
@@ -1092,9 +1136,17 @@ function openMobile(){
 
     if(name.length < 2){
 
-        alert("Please enter your name");
+        alert(
+            "Please enter your name"
+        );
 
-        nameInput.focus();
+        try{
+            nameInput.focus({
+                preventScroll:true
+            });
+        }catch(e){
+            nameInput.focus();
+        }
 
         return;
     }
@@ -1103,18 +1155,23 @@ function openMobile(){
     showStep("mobile");
 
 
-    /*
-       NEXT CLICK USER ACTION
-       kabatti direct focus.
-    */
+    try{
 
-    mobileInput.focus();
+        mobileInput.focus({
+            preventScroll:true
+        });
+
+    }catch(e){
+
+        mobileInput.focus();
+
+    }
 
 }
 
 
 /* =========================
-   MOBILE NUMBERS ONLY
+   MOBILE ONLY NUMBERS
 ========================= */
 
 mobileInput.addEventListener(
@@ -1144,10 +1201,8 @@ function openOtp(){
     if(mobile.length !== 10){
 
         alert(
-            "Please enter a valid 10 digit mobile number"
+            "Please enter valid 10 digit mobile number"
         );
-
-        mobileInput.focus();
 
         return;
     }
@@ -1160,13 +1215,23 @@ function openOtp(){
     showStep("otp");
 
 
-    otpInputs[0].focus();
+    try{
+
+        otpInputs[0].focus({
+            preventScroll:true
+        });
+
+    }catch(e){
+
+        otpInputs[0].focus();
+
+    }
 
 }
 
 
 /* =========================
-   OTP
+   OTP INPUTS
 ========================= */
 
 const otpInputs =
@@ -1178,56 +1243,54 @@ const otpInputs =
 
 
 otpInputs.forEach(
-    (input,index) => {
+(input,index)=>{
 
 
-        input.addEventListener(
-            "input",
-            function(){
+    input.addEventListener(
+    "input",
+    function(){
 
-                this.value =
-                    this.value
-                        .replace(/\D/g,"")
-                        .slice(0,1);
-
-
-                if(
-                    this.value &&
-                    index <
-                    otpInputs.length - 1
-                ){
-
-                    otpInputs[
-                        index + 1
-                    ].focus();
-
-                }
-
-            }
-        );
+        this.value =
+            this.value
+                .replace(/\D/g,"")
+                .slice(0,1);
 
 
-        input.addEventListener(
-            "keydown",
-            function(event){
+        if(
+            this.value &&
+            index < otpInputs.length - 1
+        ){
 
-                if(
-                    event.key === "Backspace" &&
-                    !this.value &&
-                    index > 0
-                ){
+            otpInputs[index + 1]
+                .focus({
+                    preventScroll:true
+                });
 
-                    otpInputs[
-                        index - 1
-                    ].focus();
+        }
 
-                }
+    });
 
-            }
-        );
 
-    }
-);
+    input.addEventListener(
+    "keydown",
+    function(event){
+
+        if(
+            event.key === "Backspace" &&
+            !this.value &&
+            index > 0
+        ){
+
+            otpInputs[index - 1]
+                .focus({
+                    preventScroll:true
+                });
+
+        }
+
+    });
+
+});
 
 
 /* =========================
@@ -1254,9 +1317,6 @@ function verifyOtp(){
 
     /*
        UI DEMO ONLY
-
-       Actual OTP verify code
-       later ikkada connect cheyyachu.
     */
 
     alert("OTP completed");
@@ -1277,8 +1337,6 @@ function loginBack(){
 
         showStep("mobile");
 
-        mobileInput.focus();
-
         return;
     }
 
@@ -1289,13 +1347,11 @@ function loginBack(){
 
         showStep("name");
 
-        nameInput.focus();
-
         return;
     }
 
 
-    /* NAME → ORIGINAL SCREEN */
+    /* NAME → FIRST SCREEN */
 
     if(currentStep === "name"){
 
@@ -1311,7 +1367,7 @@ function loginBack(){
     }
 
 
-    /* ORIGINAL SCREEN BACK */
+    /* NORMAL PAGE BACK */
 
     if(window.history.length > 1){
 
