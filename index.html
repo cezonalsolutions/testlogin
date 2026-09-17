@@ -2,15 +2,23 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+>
 
 <title>CEZOO Login</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Bungee&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link
+    href="https://fonts.googleapis.com/css2?family=Bungee&family=Poppins:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+>
 
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+>
 
 <style>
 
@@ -33,7 +41,6 @@ body{
     inset:0;
 
     font-family:'Poppins',sans-serif;
-
     background:#07913d;
 }
 
@@ -44,7 +51,7 @@ input{
 
 
 /* =========================
-   FULL PAGE
+   PAGE
 ========================= */
 
 .login-page{
@@ -52,7 +59,7 @@ input{
     inset:0;
 
     width:100%;
-    height:100dvh;
+    height:100%;
 
     overflow:hidden;
 
@@ -82,11 +89,10 @@ input{
 
 
 /* =========================
-   LIGHT BACKGROUND LINES
+   LIGHT PATTERN
 ========================= */
 
 .login-hero::before{
-
     content:"";
 
     position:absolute;
@@ -121,13 +127,12 @@ input{
 ========================= */
 
 .back-btn{
-
     position:absolute;
 
     top:calc(35px + env(safe-area-inset-top));
     left:22px;
 
-    z-index:50;
+    z-index:60;
 
     width:42px;
     height:42px;
@@ -152,7 +157,6 @@ input{
 ========================= */
 
 .cezoo-logo{
-
     position:relative;
     z-index:2;
 
@@ -177,7 +181,6 @@ input{
 ========================= */
 
 .hero-text{
-
     position:relative;
     z-index:2;
 
@@ -200,14 +203,9 @@ input{
 
 /* =========================
    IMAGE
-
-   IMPORTANT:
-   LOGIN OPEN AYYINA
-   IMAGE POSITION CHANGE AVVADU
 ========================= */
 
 .login-character{
-
     position:relative;
     z-index:2;
 
@@ -220,12 +218,17 @@ input{
     display:flex;
     align-items:flex-end;
     justify-content:center;
+
+    opacity:1;
+    visibility:visible;
+
+    transition:
+        opacity .18s ease,
+        visibility .18s ease;
 }
 
 .login-character img{
-
     width:100%;
-
     max-height:430px;
 
     display:block;
@@ -235,14 +238,14 @@ input{
 }
 
 
-/*
-   IMAGE KI LOGIN-OPEN
-   CSS EMI LEDU.
+/* KEYBOARD OPEN AYYINAPPUDU
+   IMAGE HIDE */
 
-   SO IMAGE MOVE/HIDE AVVADU.
-   WHITE SHEET IMAGE NI
-   COVER CHESTUNDI.
-*/
+.login-page.keyboard-open
+.login-character{
+    opacity:0;
+    visibility:hidden;
+}
 
 
 /* =========================
@@ -250,14 +253,14 @@ input{
 ========================= */
 
 .login-bottom{
-
     position:absolute;
 
     left:0;
     right:0;
+
     bottom:0;
 
-    z-index:20;
+    z-index:30;
 
     height:190px;
 
@@ -273,40 +276,65 @@ input{
     box-shadow:
         0 -4px 18px rgba(0,0,0,.06);
 
-    text-align:center;
-
     overflow:hidden;
 
+    text-align:center;
+
     transition:
-        height .34s cubic-bezier(.22,.75,.25,1);
+        height .28s ease,
+        transform .28s ease;
 }
 
 
 /* =========================
-   SHEET OPEN
+   KEYBOARD OPEN
 
-   ONLY SHEET HEIGHT CHANGES
-   PAGE / IMAGE / HERO
-   CHANGE AVVAVU
+   SHEET KEYBOARD ABOVE
 ========================= */
 
-.login-page.login-open .login-bottom{
+.login-page.login-open.keyboard-open
+.login-bottom{
+    /*
+       JS visualViewport tho
+       keyboard height set chestundi
+    */
 
-    height:430px;
+    bottom:var(--keyboard-height, 0px);
 
-    padding-top:24px;
+    height:315px;
+
+    padding-top:22px;
 
     text-align:left;
 }
 
 
 /* =========================
-   FIRST SCREEN CONTENT
+   KEYBOARD HIDE
+
+   SHEET MALLI KINDA
+========================= */
+
+.login-page.login-open:not(.keyboard-open)
+.login-bottom{
+    bottom:0;
+
+    height:190px;
+
+    padding-top:28px;
+}
+
+
+/* =========================
+   FIRST LOGIN CONTENT
 ========================= */
 
 .first-login-content{
     display:block;
 }
+
+
+/* Login start ayyaka button/terms hide */
 
 .login-page.login-open
 .first-login-content{
@@ -319,7 +347,6 @@ input{
 ========================= */
 
 .phone-login-btn{
-
     width:100%;
     height:60px;
 
@@ -343,11 +370,10 @@ input{
 
 
 /* =========================
-   TERMS LINE
+   TERMS
 ========================= */
 
 .terms-line{
-
     width:100%;
 
     margin:25px 0 18px;
@@ -357,13 +383,7 @@ input{
         rgba(100,100,100,.28);
 }
 
-
-/* =========================
-   TERMS
-========================= */
-
 .terms{
-
     color:#999;
 
     font-size:11.5px;
@@ -373,7 +393,6 @@ input{
 }
 
 .terms a{
-
     color:#777;
 
     font-weight:600;
@@ -383,7 +402,7 @@ input{
 
 
 /* =========================
-   FORM
+   LOGIN FORM
 ========================= */
 
 .login-form{
@@ -402,6 +421,16 @@ input{
 }
 
 
+/* KEYBOARD HIDE AYYAKA
+   FORM SHEET KINDA UNTUNDI */
+
+.login-page.login-open:not(.keyboard-open)
+.login-form{
+    opacity:0;
+    pointer-events:none;
+}
+
+
 /* =========================
    STEPS
 ========================= */
@@ -411,15 +440,12 @@ input{
 }
 
 .login-step.active{
-
     display:block;
 
-    animation:
-        stepIn .22s ease;
+    animation:stepIn .2s ease;
 }
 
 @keyframes stepIn{
-
     from{
         opacity:0;
         transform:translateX(8px);
@@ -433,11 +459,10 @@ input{
 
 
 /* =========================
-   TITLE
+   FORM TEXT
 ========================= */
 
 .form-title{
-
     color:#161616;
 
     font-size:22px;
@@ -447,13 +472,12 @@ input{
 }
 
 .form-subtitle{
-
-    margin-top:6px;
+    margin-top:5px;
 
     color:#8b8b8b;
 
-    font-size:13px;
-    line-height:1.5;
+    font-size:12.5px;
+    line-height:1.45;
 }
 
 
@@ -462,11 +486,10 @@ input{
 ========================= */
 
 .input-box{
-
     width:100%;
-    height:58px;
+    height:56px;
 
-    margin-top:19px;
+    margin-top:17px;
 
     display:flex;
     align-items:center;
@@ -475,13 +498,12 @@ input{
 
     border:1.5px solid #dedede;
 
-    border-radius:15px;
+    border-radius:14px;
 
     overflow:hidden;
 }
 
 .input-box:focus-within{
-
     border-color:#078d39;
 
     box-shadow:
@@ -489,9 +511,7 @@ input{
         rgba(7,141,57,.07);
 }
 
-
 .input-box input{
-
     width:100%;
     height:100%;
 
@@ -514,12 +534,11 @@ input{
 
 
 /* =========================
-   MOBILE PREFIX
+   MOBILE
 ========================= */
 
 .mobile-prefix{
-
-    height:26px;
+    height:25px;
 
     padding:
         0 14px
@@ -548,15 +567,14 @@ input{
 ========================= */
 
 .next-btn{
-
     width:100%;
-    height:56px;
+    height:54px;
 
-    margin-top:14px;
+    margin-top:13px;
 
     border:0;
 
-    border-radius:15px;
+    border-radius:14px;
 
     background:#078d39;
 
@@ -578,22 +596,20 @@ input{
 ========================= */
 
 .otp-boxes{
-
     width:100%;
 
     display:flex;
 
     gap:7px;
 
-    margin-top:20px;
+    margin-top:18px;
 }
 
 .otp-boxes input{
-
     width:100%;
     min-width:0;
 
-    height:54px;
+    height:52px;
 
     border:1.5px solid #ddd;
     outline:0;
@@ -611,7 +627,6 @@ input{
 }
 
 .otp-boxes input:focus{
-
     border-color:#078d39;
 
     box-shadow:
@@ -620,24 +635,18 @@ input{
 }
 
 .otp-number{
-
     color:#078d39;
 
     font-weight:600;
 }
 
-
-/* =========================
-   RESEND
-========================= */
-
 .resend-btn{
-
     display:block;
 
-    margin:16px auto 0;
+    margin:13px auto 0;
 
     border:0;
+
     background:transparent;
 
     color:#078d39;
@@ -656,23 +665,17 @@ input{
 @media(max-width:480px){
 
     .cezoo-logo{
-
         font-size:44px;
-
         margin-top:50px;
     }
 
     .hero-text{
-
         font-size:19px;
-
         margin-top:24px;
     }
 
     .login-character{
-
         width:77vw;
-
         margin-top:4px;
     }
 
@@ -680,9 +683,7 @@ input{
         max-height:390px;
     }
 
-
     .login-bottom{
-
         height:190px;
 
         border-radius:
@@ -692,39 +693,26 @@ input{
         padding-right:22px;
     }
 
-
-    /*
-       SHEET OPEN HEIGHT
-
-       IMAGE/HERO POSITION
-       TOUCH CHEYYATLEDU
-    */
-
-    .login-page.login-open
+    .login-page.login-open.keyboard-open
     .login-bottom{
+        height:300px;
 
-        height:410px;
-
-        padding-top:22px;
+        padding-top:20px;
     }
 
-
     .form-title{
-        font-size:21px;
+        font-size:20px;
     }
 }
 
 
-/* =========================
-   SHORT SCREEN
-========================= */
+/* SMALL HEIGHT */
 
 @media(max-height:650px){
 
-    .login-page.login-open
+    .login-page.login-open.keyboard-open
     .login-bottom{
-
-        height:390px;
+        height:280px;
     }
 
 }
@@ -748,27 +736,19 @@ input{
 <section class="login-hero">
 
 
-    <!-- BACK -->
-
     <button
         class="back-btn"
         onclick="loginBack()"
         aria-label="Back"
     >
-
         <i class="fa-solid fa-arrow-left"></i>
-
     </button>
 
-
-    <!-- CEZOO -->
 
     <div class="cezoo-logo">
         CEZOO
     </div>
 
-
-    <!-- TEXT -->
 
     <div class="hero-text">
 
@@ -780,8 +760,6 @@ input{
 
     </div>
 
-
-    <!-- IMAGE -->
 
     <div class="login-character">
 
@@ -798,7 +776,7 @@ input{
 
 
 <!-- =========================
-     WHITE BOTTOM SHEET
+     WHITE BOTTOM
 ========================= -->
 
 <section
@@ -807,9 +785,7 @@ input{
 >
 
 
-    <!-- =====================
-         FIRST SCREEN
-    ====================== -->
+    <!-- FIRST SCREEN -->
 
     <div class="first-login-content">
 
@@ -818,9 +794,7 @@ input{
             class="phone-login-btn"
             onclick="startLogin()"
         >
-
             Log in with phone number
-
         </button>
 
 
@@ -848,16 +822,14 @@ input{
 
 
 
-    <!-- =====================
-         LOGIN FORM
-    ====================== -->
+    <!-- LOGIN FORM -->
 
     <div class="login-form">
 
 
-        <!-- =================
-             STEP 1 NAME
-        ================== -->
+        <!-- =====================
+             1. NAME
+        ====================== -->
 
         <div
             class="login-step active"
@@ -899,9 +871,9 @@ input{
 
 
 
-        <!-- =================
-             STEP 2 MOBILE
-        ================== -->
+        <!-- =====================
+             2. MOBILE
+        ====================== -->
 
         <div
             class="login-step"
@@ -952,9 +924,9 @@ input{
 
 
 
-        <!-- =================
-             STEP 3 OTP
-        ================== -->
+        <!-- =====================
+             3. OTP
+        ====================== -->
 
         <div
             class="login-step"
@@ -982,15 +954,10 @@ input{
             <div class="otp-boxes">
 
                 <input type="tel" maxlength="1" inputmode="numeric">
-
                 <input type="tel" maxlength="1" inputmode="numeric">
-
                 <input type="tel" maxlength="1" inputmode="numeric">
-
                 <input type="tel" maxlength="1" inputmode="numeric">
-
                 <input type="tel" maxlength="1" inputmode="numeric">
-
                 <input type="tel" maxlength="1" inputmode="numeric">
 
             </div>
@@ -1025,6 +992,10 @@ input{
 
 <script>
 
+/* =========================
+   ELEMENTS
+========================= */
+
 const loginPage =
     document.getElementById("loginPage");
 
@@ -1046,7 +1017,24 @@ const mobileInput =
 const otpNumber =
     document.getElementById("otpNumber");
 
+
 let currentStep = "home";
+
+let keyboardOpen = false;
+
+
+/* =========================
+   PREVENT SCROLL
+========================= */
+
+window.addEventListener(
+    "scroll",
+    function(){
+
+        window.scrollTo(0,0);
+
+    }
+);
 
 
 /* =========================
@@ -1065,6 +1053,7 @@ function showStep(step){
         currentStep = "name";
 
         nameStep.classList.add("active");
+
     }
 
 
@@ -1073,6 +1062,7 @@ function showStep(step){
         currentStep = "mobile";
 
         mobileStep.classList.add("active");
+
     }
 
 
@@ -1081,7 +1071,85 @@ function showStep(step){
         currentStep = "otp";
 
         otpStep.classList.add("active");
+
     }
+
+}
+
+
+/* =========================
+   KEYBOARD DETECTION
+========================= */
+
+function updateKeyboard(){
+
+    if(!window.visualViewport){
+        return;
+    }
+
+
+    const viewport =
+        window.visualViewport;
+
+
+    const keyboardHeight =
+        Math.max(
+            0,
+            window.innerHeight -
+            viewport.height -
+            viewport.offsetTop
+        );
+
+
+    /*
+       120px paina difference unte
+       keyboard open ani consider
+    */
+
+    const isOpen =
+        keyboardHeight > 120;
+
+
+    keyboardOpen = isOpen;
+
+
+    document.documentElement
+        .style
+        .setProperty(
+            "--keyboard-height",
+            keyboardHeight + "px"
+        );
+
+
+    if(isOpen){
+
+        loginPage.classList.add(
+            "keyboard-open"
+        );
+
+    }
+    else{
+
+        loginPage.classList.remove(
+            "keyboard-open"
+        );
+
+    }
+
+}
+
+
+if(window.visualViewport){
+
+    window.visualViewport.addEventListener(
+        "resize",
+        updateKeyboard
+    );
+
+    window.visualViewport.addEventListener(
+        "scroll",
+        updateKeyboard
+    );
 
 }
 
@@ -1092,21 +1160,16 @@ function showStep(step){
 
 function startLogin(){
 
-    showStep("name");
-
-
-    /*
-       ONLY WHITE SHEET OPEN
-    */
-
     loginPage.classList.add(
         "login-open"
     );
 
 
+    showStep("name");
+
+
     /*
-       PAGE SCROLL CHEYYAKUNDA
-       INPUT FOCUS
+       KEYBOARD DIRECT OPEN
     */
 
     try{
@@ -1115,11 +1178,18 @@ function startLogin(){
             preventScroll:true
         });
 
-    }catch(e){
+    }
+    catch(e){
 
         nameInput.focus();
 
     }
+
+
+    setTimeout(
+        updateKeyboard,
+        50
+    );
 
 }
 
@@ -1140,14 +1210,6 @@ function openMobile(){
             "Please enter your name"
         );
 
-        try{
-            nameInput.focus({
-                preventScroll:true
-            });
-        }catch(e){
-            nameInput.focus();
-        }
-
         return;
     }
 
@@ -1161,7 +1223,8 @@ function openMobile(){
             preventScroll:true
         });
 
-    }catch(e){
+    }
+    catch(e){
 
         mobileInput.focus();
 
@@ -1171,7 +1234,7 @@ function openMobile(){
 
 
 /* =========================
-   MOBILE ONLY NUMBERS
+   MOBILE NUMBERS ONLY
 ========================= */
 
 mobileInput.addEventListener(
@@ -1221,7 +1284,8 @@ function openOtp(){
             preventScroll:true
         });
 
-    }catch(e){
+    }
+    catch(e){
 
         otpInputs[0].focus();
 
@@ -1231,7 +1295,7 @@ function openOtp(){
 
 
 /* =========================
-   OTP INPUTS
+   OTP
 ========================= */
 
 const otpInputs =
@@ -1250,6 +1314,7 @@ otpInputs.forEach(
     "input",
     function(){
 
+
         this.value =
             this.value
                 .replace(/\D/g,"")
@@ -1258,13 +1323,25 @@ otpInputs.forEach(
 
         if(
             this.value &&
-            index < otpInputs.length - 1
+            index <
+            otpInputs.length - 1
         ){
 
-            otpInputs[index + 1]
-                .focus({
-                    preventScroll:true
-                });
+            try{
+
+                otpInputs[index + 1]
+                    .focus({
+                        preventScroll:true
+                    });
+
+            }
+            catch(e){
+
+                otpInputs[
+                    index + 1
+                ].focus();
+
+            }
 
         }
 
@@ -1275,16 +1352,28 @@ otpInputs.forEach(
     "keydown",
     function(event){
 
+
         if(
             event.key === "Backspace" &&
             !this.value &&
             index > 0
         ){
 
-            otpInputs[index - 1]
-                .focus({
-                    preventScroll:true
-                });
+            try{
+
+                otpInputs[index - 1]
+                    .focus({
+                        preventScroll:true
+                    });
+
+            }
+            catch(e){
+
+                otpInputs[
+                    index - 1
+                ].focus();
+
+            }
 
         }
 
@@ -1301,7 +1390,9 @@ function verifyOtp(){
 
     const otp =
         otpInputs
-            .map(input => input.value)
+            .map(
+                input => input.value
+            )
             .join("");
 
 
@@ -1314,10 +1405,6 @@ function verifyOtp(){
         return;
     }
 
-
-    /*
-       UI DEMO ONLY
-    */
 
     alert("OTP completed");
 
@@ -1337,6 +1424,20 @@ function loginBack(){
 
         showStep("mobile");
 
+
+        try{
+
+            mobileInput.focus({
+                preventScroll:true
+            });
+
+        }
+        catch(e){
+
+            mobileInput.focus();
+
+        }
+
         return;
     }
 
@@ -1347,17 +1448,35 @@ function loginBack(){
 
         showStep("name");
 
+
+        try{
+
+            nameInput.focus({
+                preventScroll:true
+            });
+
+        }
+        catch(e){
+
+            nameInput.focus();
+
+        }
+
         return;
     }
 
 
-    /* NAME → FIRST SCREEN */
+    /* NAME → FIRST PAGE */
 
     if(currentStep === "name"){
 
         currentStep = "home";
 
         document.activeElement?.blur();
+
+        loginPage.classList.remove(
+            "keyboard-open"
+        );
 
         loginPage.classList.remove(
             "login-open"
@@ -1367,8 +1486,6 @@ function loginBack(){
     }
 
 
-    /* NORMAL PAGE BACK */
-
     if(window.history.length > 1){
 
         history.back();
@@ -1376,6 +1493,46 @@ function loginBack(){
     }
 
 }
+
+
+/* =========================
+   INPUT FOCUS
+
+   Keyboard malli open chesthe
+   sheet malli open avvali
+========================= */
+
+[
+    nameInput,
+    mobileInput,
+    ...otpInputs
+]
+.forEach(input=>{
+
+    input.addEventListener(
+        "focus",
+        function(){
+
+            loginPage.classList.add(
+                "login-open"
+            );
+
+            setTimeout(
+                updateKeyboard,
+                50
+            );
+
+        }
+    );
+
+});
+
+
+/* =========================
+   INITIAL
+========================= */
+
+updateKeyboard();
 
 </script>
 
