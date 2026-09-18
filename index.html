@@ -73,53 +73,89 @@ body{
 
 .videoArea{
     width:100%;
-
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
     margin-top:14px;
 
-    /* NO VIDEO CONTAINER BG */
-    background:none !important;
-    background-color:transparent !important;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:transparent !important;
 }
 
 
 /* =========================
-   WEBM VIDEO
+   VIDEO WRAPPER
 ========================= */
 
-.locationVideo{
+.videoWrap{
     width:65%;
     max-width:420px;
 
+    position:relative;
+
+    background:transparent !important;
+    overflow:visible;
+}
+
+
+/* =========================
+   SAFARI TRANSPARENT VIDEO
+========================= */
+
+.locationVideo{
+    width:100%;
     height:auto;
+
     display:block;
 
     object-fit:contain;
 
-    /* NO BLACK / WHITE VIDEO BG */
-    background:none !important;
+    border:0 !important;
+    outline:0 !important;
+    box-shadow:none !important;
+
+    background:transparent !important;
     background-color:transparent !important;
 
-    border:0;
-    outline:0;
-    box-shadow:none;
+    -webkit-appearance:none !important;
+    appearance:none !important;
 
-    -webkit-appearance:none;
-    appearance:none;
+    -webkit-box-shadow:none !important;
+
+    opacity:0;
 }
 
 
-/* MOBILE */
+/* Show only after video has actual frame */
+.locationVideo.videoReady{
+    opacity:1;
+}
+
+
+/* SAFARI VIDEO CONTROLS */
+
+.locationVideo::-webkit-media-controls{
+    display:none !important;
+}
+
+.locationVideo::-webkit-media-controls-panel{
+    display:none !important;
+}
+
+.locationVideo::-webkit-media-controls-start-playback-button{
+    display:none !important;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
 
 @media(max-width:480px){
 
-    .locationVideo{
+    .videoWrap{
         width:65%;
         max-width:360px;
-        height:auto;
     }
 
 }
@@ -136,36 +172,86 @@ body{
 <div class="locationTop">
 
     <div class="locationTitle">
+
         <span>Current Location</span>
+
         <span class="locationArrow"></span>
+
     </div>
 
     <div class="locationAddress">
-        Tanuku, Andhra Pradesh
+        hyderbad, Andhra Pradesh
     </div>
 
 </div>
 
 
+
 <!-- =========================
-     TRANSPARENT WEBM VIDEO
+     VIDEO
 ========================= -->
 
 <div class="videoArea">
 
-    <video
-        class="locationVideo"
-        autoplay
-        muted
-        loop
-        playsinline
-        preload="auto"
-        disablepictureinpicture
-    >
-        <source src="ballons.webm" type="video/webm">
-    </video>
+    <div class="videoWrap">
+
+        <video
+            id="locationVideo"
+            class="locationVideo"
+            autoplay
+            muted
+            loop
+            playsinline
+            webkit-playsinline
+            preload="auto"
+            disablepictureinpicture
+        >
+            <source
+                src="ballons.webm"
+                type="video/webm"
+            >
+        </video>
+
+    </div>
 
 </div>
+
+
+<script>
+
+const video = document.getElementById("locationVideo");
+
+/* Safari autoplay */
+video.muted = true;
+video.defaultMuted = true;
+
+
+/* Don't show Safari's black empty video surface.
+   Show video only when a real frame is ready. */
+
+function showVideo(){
+    video.classList.add("videoReady");
+
+    const playPromise = video.play();
+
+    if(playPromise){
+        playPromise.catch(function(){});
+    }
+}
+
+
+video.addEventListener("loadeddata", showVideo);
+
+video.addEventListener("canplay", showVideo);
+
+
+/* Already cached video */
+
+if(video.readyState >= 2){
+    showVideo();
+}
+
+</script>
 
 
 </body>
